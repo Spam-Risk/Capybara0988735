@@ -1,11 +1,52 @@
+<!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <title>Dust to Dust</title>
   </head>
   <body>
-    <script src="pixi.min.js"></script>
     <script src="bump.js"></script>
-    <script>
-      let canvas = PIXI.canvas
+    <script src="pixi.min.js"></script>
+    <script type="text/javascript">
+      let Container = PIXI.Container,
+          autoDetectRenderer = PIXI.autoDetectRenderer,
+          Sprite = PIXI.Sprite,
+          loader = PIXI.loader,
+          resources = PIXI.loader.resources,
+          Graphics = PIXI.Graphics,
+          Text = PIXI.Text
+    
+      let stage = new Container(),
+          renderer = autoDetectRenderer(window.innerHeight - 16, window.innerHeight - 16);
+      document.body.appendChild(renderer.view);
+
+      renderer.view.style.border = "2px dashed black";
+      renderer.backgroundColor = "0xFFFFFF";
+      document.body.style.overflow = "hidden";
+      document.body.style.backgroundColor = "white";
+
+      loader
+        .add("Odyssey.jpg")
+        .add("Before_the_night.jpg")
+        .load(setup);
+    
+      function setup() {
+        state = play;
+      
+        gameLoop();
+      }
+    
+      function gameLoop() {
+        requestAnimationFrame(gameLoop);
+      
+        state();
+      
+        renderer.render(stage);
+      }
+    
+      function play() {
+      
+      }
     </script>
   </body>
 </html>
